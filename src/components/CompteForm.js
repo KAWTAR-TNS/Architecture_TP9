@@ -15,7 +15,8 @@ function CompteForm() {
     e.preventDefault(); // Empêche le rechargement de la page
     axios.post('${API_BASE_URL}/comptes', compte) // Envoie une requête POST avec les données
       .then(response => alert('Compte ajouté')) // Confirmation de l'ajout
-      .catch(error => console.error(error)); // Gestion des erreurs
+      .catch(error => console.error(error));
+      
   };
 
   return (
