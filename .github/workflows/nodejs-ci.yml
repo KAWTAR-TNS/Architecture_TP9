@@ -3,10 +3,10 @@ name: Node.js CI
 on:
   push:
     branches:
-      - '**'    # all branches
+      - '**'   
   pull_request:
     branches:
-      - '**'    # all branches
+      - '**'    
 
 jobs:
   build:
@@ -19,18 +19,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # or your desired Node version
+          node-version: '18'
+          cache: 'npm' 
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules  
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  
 
       - name: Run tests
         run: npm test
+        env:
+          CI: true 
